@@ -1,0 +1,43 @@
+body{
+	min-height: 100%;
+	position: relative;
+	font-size: 14px;
+	width: 100%;
+/*	background: #fafafa;*/
+}
+html{
+	height: 100%;
+	max-width: 800px;
+	margin: auto;
+}
+
+p{
+	/*line-height: 1.3em;*/
+}
+input{
+  -webkit-appearance: none;
+  border-radius: 0;
+  font-size: 1em;  
+}
+input:focus{
+	font-size: 1em;
+}
+
+.fl{
+	float: left;
+}
+
+.fr{
+	float: right;
+}
+.cf:after {
+	content: '';
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.hide{
+	display: none;
+}

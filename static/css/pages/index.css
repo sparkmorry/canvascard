@@ -1,0 +1,63 @@
+.generater{
+	/*text-align: center;*/
+	position: relative;
+	padding: 40px 50px 40px 50px;
+	font-size: 16px;
+}
+.title-wrapper{
+	text-align: center;
+}
+.logo-title{
+	text-align: center;
+	margin-bottom: 40px;
+}
+.follower{
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+.btn-wrapper{
+	text-align: center;
+	margin-top: 40px;
+	/*position: absolute;*/
+
+}
+.btn{
+	padding: 10px 30px;
+	color: white;
+	background: #e1a5a5;
+	display: inline-block;
+	z-index: 300;
+	position: absolute;
+}
+.upload{
+	width: 150px;
+	height: 150px;
+	background: #eee;
+	color: #a7a7a7;
+	border: solid 1px #d2d2d2;
+	text-align: center;
+	line-height: 150px;
+	margin: 20px 0 0 20px;
+	/*position: relative;*/
+}
+.pre-pic{
+	width: 150px;
+	height: 150px;
+	/*position: absolute;*/
+/*	left: 0;
+	top: 0;
+*/}
+textarea{
+	border: solid 1px #dcdcdc;
+	width: 100%;
+	padding: 10px;
+	height: 100px;
+	margin: 20px 0 40px 0px;
+	background: white;
+	z-index: 300;
+
+}
+textarea:focus{
+	outline: none;
+}
