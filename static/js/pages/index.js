@@ -76,9 +76,9 @@ function writeTextOnCanvas(ctx, lh, rw, text){
 	for(var i = 1; getTrueLength(text) > 0; i++){
 		var tl = cutString(text, rw);
 		if(i==1){
-			ctx.fillText(text.substr(0, tl).replace(/^\s+|\s+$/, ""), 80, i * lineheight + 730);
+			ctx.fillText(text.substr(0, tl).replace(/^\s+|\s+$/, ""), 80, i * lineheight + 900);
 		}else{
-			ctx.fillText(text.substr(0, tl).replace(/^\s+|\s+$/, ""), 40, i * lineheight + 730);
+			ctx.fillText(text.substr(0, tl).replace(/^\s+|\s+$/, ""), 40, i * lineheight + 900);
 		}
 		text = text.substr(tl);
 	}
@@ -105,27 +105,33 @@ jQuploadInput.bind('change',readFile)
 var theCanvas = document.getElementById("j-canvas");
 var context = theCanvas.getContext("2d");
 function draw(image){
-	theCanvas.width=800;
-	theCanvas.style.width = 400;
-	theCanvas.height = 1300;
-	theCanvas.style.height = 650;
+	theCanvas.width=1000;
+	theCanvas.style.width = 800;
+	theCanvas.height = 1536;
+	theCanvas.style.height = 1229;
 	theCanvas.style.margin = "auto";
+	var windowW = $(window).width();
+	if(windowW<600){
+		theCanvas.style.width = windowW*0.9;
+		theCanvas.style.height = 1229*windowW*0.9/800.0;
+		theCanvas.style.marginLeft = windowW*0.05;
+	}
 
 	context.fillStyle="#fff";
-	context.rect(0,0,800,1300);
+	context.rect(0,0,1000,1536);
 	// 绘制图像
 	context.fillStyle="#feebed";
-	context.roundRect(40, 20, 660, 660, 30).fill();
-	context.drawImage(image, 70, 50, 600, 600);
+	context.roundRect(70, 20, 860, 860, 35).fill();
+	context.drawImage(image, 105, 55, 790, 790);
 	//绘制背景
 	var bg = new Image();
     bg.src = "static/images/bg.png";
-	context.drawImage(bg, 0, 530, 800, 712);
+	context.drawImage(bg, 0, 600, 1000, 881);
 	//绘制文字
 	var content = jQcontent.val();
-	context.font="36px Georgia";
+	context.font="36px Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei";
 	context.fillStyle="#000";
-	writeTextOnCanvas(context, 40, 45, content);
+	writeTextOnCanvas(context, 60, 41, content);
 }
 
 
