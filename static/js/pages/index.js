@@ -119,7 +119,7 @@ function draw(image){
 		theCanvas.style.width = windowW*0.9;
 		theCanvas.style.height = 1229*windowW*0.9/800.0;
 		theCanvas.style.marginLeft = windowW*0.05;
-		jQcard.css({'width': windowW*0.9, 'height': 1229*windowW*0.9/800.0, 'margin-left': windowW*0.05;})
+		jQcard.css({'width': windowW*0.9, 'height': 1229*windowW*0.9/800.0, 'margin-left': windowW*0.05})
 	}
 
 	context.fillStyle="#fff";
