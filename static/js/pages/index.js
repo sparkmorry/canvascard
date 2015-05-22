@@ -137,7 +137,7 @@ function draw(image){
 	context.font="36px Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei";
 	context.fillStyle="#000";
 	writeTextOnCanvas(context, 60, 46, content);
-	var dt = theCanvas.toDataURL();;
+	var dt = theCanvas.toDataURL("image/jpeg", 0.9);
 	jQcard.attr('src', dt);
 }
 
@@ -161,10 +161,10 @@ jQgenerateBtn.bind('click', function(){
 
 
 $("#j-save").bind('click', function(){
-	// this.href = theCanvas.toDataURL();
- //    this.download = 'bbt.png';
-  var img = document.getElementById('j-card');
-  window.location.href = img.src.replace('image/png', 'image/octet-stream');
+	this.href = jQcard.attr("src")
+    this.download = 'bbt.jpeg';
+  // var img = document.getElementById('j-card');
+  // window.location.href = img.src.replace('image/png', 'image/octet-stream');
 
 })
 
