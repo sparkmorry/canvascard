@@ -99,8 +99,6 @@ function readFile(){
     	jQuploadBtn.css({'background-image': 'url('+this.result+')', 
     		'background-size': '150px 150px'});
         m1 = new Image();
-        m1.crossOrigin = "anonymous";
-        // m1.setAttribute('crossOrigin', 'anonymous');
         m1.src = this.result;
     }
 }
@@ -130,8 +128,6 @@ function draw(image){
 	context.drawImage(image, 105, 55, 790, 790);
 	//绘制背景
 	var bg = new Image();
-    // bg.setAttribute('crossOrigin', 'anonymous');
-    // bg.crossOrigin = "Anonymous";
     bg.src = "static/images/bg.png";
 	context.drawImage(bg, 0, 600, 1000, 881);
 	//绘制文字
