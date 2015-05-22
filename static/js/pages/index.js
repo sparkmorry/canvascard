@@ -107,6 +107,7 @@ jQuploadInput.bind('change',readFile)
 
 var theCanvas = document.getElementById("j-canvas");
 var context = theCanvas.getContext("2d");
+var jQcard = $("#j-card");
 function draw(image){
 	theCanvas.width=1000;
 	theCanvas.style.width = 600;
@@ -118,6 +119,7 @@ function draw(image){
 		theCanvas.style.width = windowW*0.9;
 		theCanvas.style.height = 1229*windowW*0.9/800.0;
 		theCanvas.style.marginLeft = windowW*0.05;
+		jQcard.css({'width': windowW*0.9, 'height': 1229*windowW*0.9/800.0, 'margin-left': windowW*0.05;})
 	}
 
 	context.fillStyle="#fff";
@@ -135,6 +137,8 @@ function draw(image){
 	context.font="36px Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei";
 	context.fillStyle="#000";
 	writeTextOnCanvas(context, 60, 46, content);
+	var dt = theCanvas.toDataURL();;
+	jQcard.attr('src', dt);
 }
 
 
@@ -157,8 +161,11 @@ jQgenerateBtn.bind('click', function(){
 
 
 $("#j-save").bind('click', function(){
-	this.href = theCanvas.toDataURL();
-    this.download = 'bbt.png';
+	// this.href = theCanvas.toDataURL();
+ //    this.download = 'bbt.png';
+  var img = document.getElementById('j-card');
+  window.location.href = img.src.replace('image/png', 'image/octet-stream');
+
 })
 
 $("#j-restart").bind('click', function(){
