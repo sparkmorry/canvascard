@@ -26,7 +26,7 @@
 	height: 100px;
 
 }
-.btn{
+.generate-btn{
 	padding: 10px 30px;
 	color: white;
 	background: #e1a5a5;
@@ -37,8 +37,24 @@
 	position: absolute;
 	left: 50%;
 	margin-left: -87px;
-
 }
+.bbt{
+	background: #fafafa;
+}
+.btns{
+	text-align: center;
+	margin: 10px 0;
+}
+.btn{
+	padding: 10px 30px;
+	color: white;
+	background: #e1a5a5;
+	font-size: 20px;
+	cursor: pointer;
+	display: inline-block;
+	margin-right: 10px;
+}
+
 .upload-wrapper{
 	position: relative;
 	height: 200px;

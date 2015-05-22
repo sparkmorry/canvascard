@@ -23,12 +23,16 @@
 			<input type="file" id="j-upload-input" class="hide">
 		</div>
 		<div class="btn-wrapper">
-			<div class="btn" id="j-generate-btn">一键生成贺卡</div>
+			<div class="generate-btn" id="j-generate-btn">一键生成贺卡</div>
 		</div>
 		<img class="follower" src="static/images/follower.png">
 	</div>
 	<div class="bbt hide" id="j-bbt">
-		<p>请点击右键下载图片</p>
+		<!-- <p>请点击右键下载图片</p> -->
+		<div class="btns">
+			<a id="j-save" class="btn">下载图片</a>
+			<a id="j-restart" class="btn">重新生成</a>
+		</div>
 		<canvas id="j-canvas"></canvas>
 		<img id="" class="hide" src="static/images/bg.png">
 	</div>
