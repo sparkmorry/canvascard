@@ -137,7 +137,7 @@ function draw(image){
 	context.font="36px Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei";
 	context.fillStyle="#000";
 	writeTextOnCanvas(context, 60, 46, content);
-	var dt = theCanvas.toDataURL("image/jpeg", 0.9);
+	var dt = theCanvas.toDataURL("image/jpeg", 0.9).replace(/^data:image\/[^;]/, 'data:application/octet-stream');;
 	jQcard.attr('src', dt);
 }
 
@@ -161,7 +161,7 @@ jQgenerateBtn.bind('click', function(){
 
 
 $("#j-save").bind('click', function(){
-	this.href = jQcard.attr("src")
+	this.href = jQcard.attr("src");
     this.download = 'bbt.jpeg';
   // var img = document.getElementById('j-card');
   // window.location.href = img.src.replace('image/png', 'image/octet-stream');
