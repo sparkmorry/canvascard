@@ -5,6 +5,7 @@ var jQtextCount = $("#j-count");
 var jQuploadInput = $("#j-upload-input");
 var jQbbt = $("#j-bbt");
 var jQenerater = $("#j-generater");
+
 jQpicPreview = $("#j-pre-pic");
 
 jQuploadBtn.bind('click', function(){
@@ -16,7 +17,7 @@ jQcontent.bind('keyup', function(){
 	count = jQcontent.val().length;
 	if(count>0){
 		jQtextCount.text(count+"字");
-		if(count>140){
+		if(count>150 || count<70){
 			jQtextCount.css({'color':'red'})
 		}else{
 			jQtextCount.css({'color':'black'})
@@ -86,20 +87,21 @@ function writeTextOnCanvas(ctx, lh, rw, text){
 		text = text.substr(tl);
 	}
 }
-var m1;
+var m1, file;
 function readFile(){
-    var file = jQuploadInput.get(0).files[0];
+    file = jQuploadInput.get(0).files[0];
     if(!/image\/\w+/.test(file.type)){
-        alert("请确保文件为图像类型");
+        alert("请上传图片类型的文件~");
         return false;
     }
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function(e){
-    	jQuploadBtn.css({'background-image': 'url('+this.result+')', 
-    		'background-size': '150px 150px'});
+    	jQuploadBtn.css({'background': 'url('+this.result+') no-repeat center', 
+    		'background-size': '200px'});
         m1 = new Image();
         m1.src = this.result;
+        jQuploadBtn.text('');
     }
 }
 
@@ -116,10 +118,14 @@ function draw(image){
 	theCanvas.style.marginLeft = 100;
 	var windowW = $(window).width();
 	if(windowW<600){
-		theCanvas.style.width = windowW*0.9;
-		theCanvas.style.height = 1229*windowW*0.9/800.0;
-		theCanvas.style.marginLeft = windowW*0.05;
-		jQcard.css({'width': windowW*0.9, 'height': 1229*windowW*0.9/800.0, 'margin-left': windowW*0.05})
+		// theCanvas.style.width = windowW*0.9;
+		// theCanvas.style.height = 1229*windowW*0.9/800.0;
+		// theCanvas.style.marginLeft = windowW*0.05;
+		// jQcard.css({'width': windowW*0.9, 'height': 1229*windowW*0.9/800.0, 'margin-left': windowW*0.05})
+		theCanvas.style.width = windowW;
+		theCanvas.style.height = 1229*windowW/800.0;
+		theCanvas.style.marginLeft = 0;
+		jQcard.css({'width': windowW, 'height': 1229*windowW/800.0, 'margin-left': 0})
 	}
 
 	context.fillStyle="#fff";
@@ -137,19 +143,47 @@ function draw(image){
 	context.font="36px Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei";
 	context.fillStyle="#000";
 	writeTextOnCanvas(context, 60, 46, content);
-	var dt = theCanvas.toDataURL("image/jpeg", 0.9);
-	jQcard.attr('src', dt);
+	if(windowW<600){
+		var dt = theCanvas.toDataURL("image/jpeg", 0.7);
+		// $.ajaxFileUpload({
+  //           url: '/upload', 
+  //           type: 'post',
+  //           secureuri: false, //一般设置为false
+  //           fileElementId: 'j-upload-input', // 上传文件的id、name属性名
+  //           dataType: 'application/json', //返回值类型，一般设置为json、application/json
+  //           success: function(data, status){ 
+  //               console.log(data); 
+  //               jQcard.attr('src', $.parseJSON(data).url);
+  //               // alert('file');
+  //           },	
+  //           error: function(data, status){  
+  //               console.log(data);
+  //               // jQcard.attr('src', data.url);
+  //               alert("请刷新后重新尝试")
+  //           },
+		// })
+		$.post("/upload", {
+			imgData : dt
+		}, function(ret){
+			jQcard.attr('src', $.parseJSON(ret).url);
+		})
+	}else{
+		var dt = theCanvas.toDataURL("image/jpeg", 0.9);
+		jQcard.attr('src', dt);
+	}
 }
 
 
 jQgenerateBtn.bind('click', function(){
     var file = jQuploadInput.get(0).files[0];
     if(count ==0){
-		alert("请输入告白内容")
-    }else if(count>140) {
-		alert("输入的文字过长")
+		alert("你还没有输入告白内容哦！")
+	// }else if(count<65) {
+	// 	alert("告白长一些才更有心意呢！")
+    }else if(count>155) {
+		alert("字太多啦，贺卡写不下啦！")
 	}else if(!file){
-		alert("请上传图片")
+		alert("你们的回忆照片怎么能少~");
 	}else{
 		readFile();
 		draw(m1);
@@ -163,11 +197,12 @@ jQgenerateBtn.bind('click', function(){
 $("#j-save").bind('click', function(){
 	this.href = jQcard.attr("src")
     this.download = 'bbt.jpeg';
-  // var img = document.getElementById('j-card');
-  // window.location.href = img.src.replace('image/png', 'image/octet-stream');
-
 })
 
 $("#j-restart").bind('click', function(){
 	window.location.reload();
-})
+});
+
+$('#j-regenerate').bind('click', function(){
+	window.location.reload();
+});

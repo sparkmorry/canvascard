@@ -14,20 +14,20 @@
 }
 .follower{
 	position: absolute;
-	right: 70px;
-	bottom: 20px;
-	opacity: 0.8;
+	right: 50px;
+	bottom: 105px;
+	opacity: 0.6;
 }
 .btn-wrapper{
 	text-align: center;
-	margin-top: 40px;
-	margin-bottom: 50px;
+	margin-top: 90px;
+	margin-bottom: 0;
 	position: relative;
 	height: 100px;
 
 }
 .generate-btn{
-	padding: 10px 30px;
+	padding: 10px 40px;
 	color: white;
 	background: #e1a5a5;
 	font-size: 20px;
@@ -36,8 +36,20 @@
 	z-index: 300;
 	position: absolute;
 	left: 50%;
-	margin-left: -87px;
+	margin-left: -110px;
+
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	/*border-bottom: 1px solid rgba(0,0,0,0.25);*/
 }
+.generate-btn:active {
+	background: #e39898;
+}
+.back, .download{
+	display: none;
+}
+
 .bbt{
 	background: #fafafa;
 }
@@ -53,6 +65,14 @@
 	cursor: pointer;
 	display: inline-block;
 	margin-right: 10px;
+
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	/*border-bottom: 1px solid rgba(0,0,0,0.25);*/
+}
+.btn:active{
+	background: #fafafa;
 }
 
 .upload-wrapper{
@@ -60,21 +80,21 @@
 	height: 200px;
 }
 .upload{
-	width: 150px;
-	height: 150px;
+	width: 200px;
+	height: 200px;
 	background: #eee;
 	color: #a7a7a7;
 	border: solid 1px #d2d2d2;
 	cursor: pointer;
 	text-align: center;
-	line-height: 150px;
-	margin: 30px 0 0 30px;
+	line-height: 200px;
+	margin: 30px 0 0 0px;
 	position: absolute;
 	z-index: 300;
 }
 .pre-pic{
-	width: 150px;
-	height: 150px;
+	width: 200px;
+	height: 200px;
 	/*position: absolute;*/
 /*	left: 0;
 	top: 0;
@@ -82,9 +102,9 @@
 textarea{
 	border: solid 1px #dcdcdc;
 	width: 100%;
-	font-family: Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei;
+	/*font-family: Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei;*/
 	font-size: 17px;
-	line-height: 32px;
+	line-height: 30px;
 	padding: 5px 15px 0 15px;
 	height: 140px;
 	margin: 20px 0 60px 0px;
@@ -104,13 +124,13 @@ textarea:focus{
 	.upload{
 		position: absolute;
 		left: 50%;
-		margin-left: -75px;
+		margin-left: -110px;
 		background: white;
 	}
 	.follower{
 		right: 0px;
-		width: 250px;
-		bottom: 140px;
+		width: 300px;
+		bottom: 70px;
 	}
 	.logo-title{
 		margin-bottom: 30px;
@@ -119,6 +139,31 @@ textarea:focus{
 		position: relative;
   		top: 185px;
 	}
+	.btns{
+		display: none;
+	}
+	.bbt{
+		margin-top: 20px;
+		position: relative;
+	}
+	.download{
+	  width: 100px;
+	  position: fixed;
+	  right: 5px;
+	  top: 5px;
+	  display: block;
+	}
+	.back{
+	  display: block;
+	  position: fixed;
+	  left: 0px;
+	  top: 10px;
+	  padding: 10px;
+	  background: rgba(164, 0, 0, 0.41);
+  	}
+	.arrow{
+		width: 40px;
+	}
 	h4{
 		font-size: 0.9em;
 		color: #343434;
@@ -126,5 +171,6 @@ textarea:focus{
 	textarea{
 		margin: 20px 0 40px 0px;
 		padding: 5px;
+		line-height: 22px;
 	}
 }

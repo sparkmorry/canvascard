@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>桃缘逸梦告白生成器</title>
+	<title>桃缘逸梦告白贺卡生成器</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
     <link rel="stylesheet" type="text/css" href="static/css/basic/reset.css?ver=547d8673">
@@ -13,14 +13,16 @@
 			<img class="logo-title" src="static/images/title.png">
 		</div>
 		<div>
-			<h4>你想对ta说：（请把字数控制在60-140之间噢！）<span class="fr text-count" id="j-count"></span></h4>
+			<h4>你想对ta说：（请把字数控制在70-150间哦！）<span class="fr text-count" id="j-count"></span></h4>
 			<textarea id="j-content"></textarea>		
 		</div>
 		<div class="upload-wrapper">
-			<h4>你和ta的记忆：（请上传正方形的照片噢！）</h4>
+			<h4>你和ta的记忆：（请把照片裁剪成正方形再上传:P）</h4>
 			<div class="upload" id="j-upload-btn">点击上传图片</div>
 			<img class="hide pre-pic" id="j-pre-pic" src="">
-			<input type="file" id="j-upload-input" class="hide">
+			<form action="/upload" id="j-file-form" method="post" enctype="multipart/form-data">
+				<input type="file"  name="file" id="j-upload-input" class="hide">
+			</form>
 		</div>
 		<div class="btn-wrapper">
 			<div class="generate-btn" id="j-generate-btn">一键生成贺卡</div>
@@ -29,6 +31,8 @@
 	</div>
 	<div class="bbt hide" id="j-bbt">
 		<!-- <p>请点击右键下载图片</p> -->
+		<img class="download" src="static/images/download.png">
+		<div id="j-regenerate" class="back"><img class="arrow" src="static/images/arrow_white.png"></div>
 		<div class="btns">
 			<a id="j-save" class="btn">下载图片</a>
 			<a id="j-restart" class="btn">重新生成</a>
