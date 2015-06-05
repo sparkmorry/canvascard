@@ -40,7 +40,7 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
 	this.closePath();
 	return this;
 }
-function writeTextOnCanvas(ctx, lh, rw, text){
+function writeTextOnCanvas(ctx, lh, rw, left, start, text){
 	var lineheight = lh;
 	var text = text;
 
@@ -80,9 +80,9 @@ function writeTextOnCanvas(ctx, lh, rw, text){
 		var tl = cutString(text, rw);
 		var tl1 = cutString(text, rw-2);
 		if(i==1){
-			ctx.fillText(text.substr(0, tl1).replace(/^\s+|\s+$/, ""), 120, i * lineheight + 900);
+			ctx.fillText(text.substr(0, tl1).replace(/^\s+|\s+$/, ""), left+40, i * lineheight + start);
 		}else{
-			ctx.fillText(text.substr(0, tl).replace(/^\s+|\s+$/, ""), 80, i * lineheight + 900);
+			ctx.fillText(text.substr(0, tl).replace(/^\s+|\s+$/, ""), left, i * lineheight + start);
 		}
 		text = text.substr(tl);
 	}
@@ -111,66 +111,65 @@ var theCanvas = document.getElementById("j-canvas");
 var context = theCanvas.getContext("2d");
 var jQcard = $("#j-card");
 function draw(image){
-	theCanvas.width=1000;
-	theCanvas.style.width = 600;
-	theCanvas.height = 1536;
-	theCanvas.style.height = 922;  //1229
-	theCanvas.style.marginLeft = 100;
 	var windowW = $(window).width();
 	if(windowW<600){
-		// theCanvas.style.width = windowW*0.9;
-		// theCanvas.style.height = 1229*windowW*0.9/800.0;
-		// theCanvas.style.marginLeft = windowW*0.05;
-		// jQcard.css({'width': windowW*0.9, 'height': 1229*windowW*0.9/800.0, 'margin-left': windowW*0.05})
-		theCanvas.style.width = windowW;
-		theCanvas.style.height = 1229*windowW/800.0;
-		theCanvas.style.marginLeft = 0;
-		jQcard.css({'width': windowW, 'height': 1229*windowW/800.0, 'margin-left': 0})
-	}
+		theCanvas.width = 640;
+		theCanvas.height = 983;
+		jQcard.css({'width': windowW-20, 'height': 983*(windowW-20)/640.0, 'margin-left': '10px'});
+		
+		//绘制
+		context.fillStyle="#fff";
+		context.fillRect(0,0,640,983);
+		// 绘制图像
+		context.fillStyle="#feebed";
+		context.roundRect(40, 10, 550, 550, 30).fill(); //x, y, w, h, r
+		context.drawImage(image, 60, 25, 510, 510);
+		//绘制背景
+		var bg = new Image();
+	    bg.src = "static/images/bg.png";
+		context.drawImage(bg, 0, 433, 640, 550);
+		//绘制文字
+		var content = jQcontent.val();
+		context.font="24px Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei";
+		context.fillStyle="#000";
+		writeTextOnCanvas(context, 50, 46, 45, 550,  content);		
+		var dt = theCanvas.toDataURL("image/jpeg", 0.9);
 
-	context.fillStyle="#fff";
-	context.fillRect(0,0,1000,1536);
-	// 绘制图像
-	context.fillStyle="#feebed";
-	context.roundRect(70, 20, 860, 860, 35).fill();
-	context.drawImage(image, 105, 55, 790, 790);
-	//绘制背景
-	var bg = new Image();
-    bg.src = "static/images/bg.png";
-	context.drawImage(bg, 0, 600, 1000, 881);
-	//绘制文字
-	var content = jQcontent.val();
-	context.font="36px Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei";
-	context.fillStyle="#000";
-	writeTextOnCanvas(context, 60, 46, content);
-	if(windowW<600){
-		var dt = theCanvas.toDataURL("image/jpeg", 0.7);
-		// $.ajaxFileUpload({
-  //           url: '/upload', 
-  //           type: 'post',
-  //           secureuri: false, //一般设置为false
-  //           fileElementId: 'j-upload-input', // 上传文件的id、name属性名
-  //           dataType: 'application/json', //返回值类型，一般设置为json、application/json
-  //           success: function(data, status){ 
-  //               console.log(data); 
-  //               jQcard.attr('src', $.parseJSON(data).url);
-  //               // alert('file');
-  //           },	
-  //           error: function(data, status){  
-  //               console.log(data);
-  //               // jQcard.attr('src', data.url);
-  //               alert("请刷新后重新尝试")
-  //           },
-		// })
 		$.post("/upload", {
 			imgData : dt
 		}, function(ret){
 			jQcard.attr('src', $.parseJSON(ret).url);
 		})
+
 	}else{
+		// pc
+		theCanvas.width=1000;
+		theCanvas.style.width = 600;
+		theCanvas.height = 1536;
+		theCanvas.style.height = 922;  //1229
+		theCanvas.style.marginLeft = 100;
+
+		//绘制
+		context.fillStyle="#fff";
+		context.fillRect(0,0,1000,1536);
+		// 绘制图像
+		context.fillStyle="#feebed";
+		context.roundRect(70, 20, 860, 860, 35).fill();
+		context.drawImage(image, 105, 55, 790, 790);
+		//绘制背景
+		var bg = new Image();
+	    bg.src = "static/images/bg.png";
+		context.drawImage(bg, 0, 600, 1000, 881);
+		//绘制文字
+		var content = jQcontent.val();
+		context.font="36px Microsoft JhengHei, Apple LiGothic Medium, STHeiti, SimHei";
+		context.fillStyle="#000";
+		writeTextOnCanvas(context, 60, 46, 80, 900, content);
+
 		var dt = theCanvas.toDataURL("image/jpeg", 0.9);
 		jQcard.attr('src', dt);
 	}
+
 }
 
 
