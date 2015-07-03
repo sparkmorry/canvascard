@@ -112,6 +112,9 @@ var context = theCanvas.getContext("2d");
 var jQcard = $("#j-card");
 function draw(image){
 	var windowW = $(window).width();
+	var w, h, sizeW, sizeH, x, y;
+	var sx, sy, swidth, sheight;
+
 	if(windowW<600){
 		theCanvas.width = 640;
 		theCanvas.height = 983;
@@ -123,7 +126,23 @@ function draw(image){
 		// 绘制图像
 		context.fillStyle="#feebed";
 		context.roundRect(40, 10, 550, 550, 30).fill(); //x, y, w, h, r
-		context.drawImage(image, 60, 25, 510, 510);
+		w = image.width, h=image.height;
+		sizeW = 510;
+		if(w>=h){
+			// 横构图
+			sizeH = parseInt(h/w*sizeW);
+			x = 60;
+			y = parseInt((510 - sizeH)/2)+25;
+			context.drawImage(image, 60, y, sizeW, sizeH);
+		}else{
+			// 竖构图
+			swidth = w;
+			sheight = w;
+			sx = 0;
+			sy = parseInt((h - w)/2);
+			context.drawImage(image,sx,sy,swidth,sheight, 60, 25, 510, 510);
+		}
+		// context.drawImage(image, 60, 25, 510, 510);
 		//绘制背景
 		var bg = new Image();
 	    bg.src = "static/images/bg.png";
@@ -155,7 +174,24 @@ function draw(image){
 		// 绘制图像
 		context.fillStyle="#feebed";
 		context.roundRect(70, 20, 860, 860, 35).fill();
-		context.drawImage(image, 105, 55, 790, 790);
+		w = image.width, h=image.height;
+		sizeW = 790;
+		if(w>=h){
+			// 横构图
+			sizeH = parseInt(h/w*sizeW);
+			x = 105;
+			y = parseInt((790 - sizeH)/2)+55;
+			context.drawImage(image, x, y, sizeW, sizeH);
+		}else{
+			// 竖构图
+			swidth = w;
+			sheight = w;
+			sx = 0;
+			sy = parseInt((h - w)/2);
+			context.drawImage(image,sx,sy,swidth,sheight, 105, 55, 790, 790);
+		}
+
+		// context.drawImage(image, 105, 55, 790, 790);
 		//绘制背景
 		var bg = new Image();
 	    bg.src = "static/images/bg.png";
@@ -177,8 +213,8 @@ jQgenerateBtn.bind('click', function(){
     var file = jQuploadInput.get(0).files[0];
     if(count ==0){
 		alert("你还没有输入告白内容哦！")
-	// }else if(count<65) {
-	// 	alert("告白长一些才更有心意呢！")
+	}else if(count<65) {
+		alert("告白长一些才更有心意呢！")
     }else if(count>155) {
 		alert("字太多啦，贺卡写不下啦！")
 	}else if(!file){
